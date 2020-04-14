@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registerflutterapp/widget/custom_background.dart';
 import 'package:registerflutterapp/widget/custom_stepper.dart';
 
 void main() => runApp(MyApp());
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     for (var i = 0; i < 4; i++) {
       var stepVal = CustomStep(
         title: SizedBox(),
-        content: Text("This is the child of $i step"),
+        content: SizedBox(),
         isActive: true,
       );
       steps.add(stepVal);
@@ -53,27 +54,40 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: CustomStepper(
-          type: CustomStepperType.horizontal,
-          currentStep: this.stepCounter,
-          steps: steps,
-          onStepTapped: (step) {
-            setState(() {
-              stepCounter = step;
-            });
-          },
-          onStepCancel: () {
-            setState(() {
-              stepCounter > 0 ? stepCounter -= 1 : stepCounter = 0;
-            });
-          },
-          onStepContinue: () {
-            setState(() {
-              stepCounter < steps.length - 1
-                  ? stepCounter += 1
-                  : stepCounter = 0;
-            });
-          },
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: CustomStepper(
+                type: CustomStepperType.horizontal,
+                currentStep: this.stepCounter,
+                steps: steps,
+                controlsBuilder: (BuildContext context,
+                    {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+                  if (stepCounter == 1) {
+                    return MaterialButton(
+                        onPressed: onStepContinue, child: Text('Vikas1'));
+                  } else if (stepCounter == 2) {
+                    return Text('Vikas2');
+                  } else if (stepCounter == 3) {
+                    return Text('Vikas3');
+                  }
+                  return Text('Vikas ');
+                },
+                onStepTapped: (step) {
+                  setState(() {
+                    stepCounter = step;
+                  });
+                },
+                onStepContinue: () {
+                  setState(() {
+                    stepCounter < steps.length - 1
+                        ? stepCounter += 1
+                        : stepCounter = 0;
+                  });
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
