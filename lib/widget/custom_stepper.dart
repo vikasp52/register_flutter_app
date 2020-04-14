@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:registerflutterapp/utils/colors.dart';
 
 /*
 import 'button_theme.dart';
@@ -647,10 +648,14 @@ class _CustomStepperState extends State<CustomStepper> with TickerProviderStateM
 
     return Column(
       children: <Widget>[
-        Material(
-          elevation: 0.0,
+        Container(
+          decoration: BoxDecoration(
+            color: AllColors().stepperBackgroundColor,
+              //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40)),
+              //border: Border.all(width: 3,color: Colors.green,style: BorderStyle.solid)
+          ),
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 24.0),
+            margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 60.0),
             child: Row(
               children: children,
             ),

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:registerflutterapp/utils/colors.dart';
 import 'package:registerflutterapp/widget/custom_background.dart';
 import 'package:registerflutterapp/widget/custom_stepper.dart';
 
 void main() => runApp(MyApp());
-
-//e8eced
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -52,24 +52,43 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Expanded(
+    return Scaffold(
+      backgroundColor: AllColors().backgroundColor,
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Expanded(
+            child: Theme(
+              data: ThemeData(
+                canvasColor: AllColors().stepperBackgroundColor,
+              ),
               child: CustomStepper(
                 type: CustomStepperType.horizontal,
                 currentStep: this.stepCounter,
                 steps: steps,
                 controlsBuilder: (BuildContext context,
                     {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
-                  if (stepCounter == 1) {
+                  if (stepCounter == 0) {
                     return MaterialButton(
-                        onPressed: onStepContinue, child: Text('Vikas1'));
+                        color: Colors.amber,
+                        onPressed: onStepContinue,
+                        child: Text('Vikas1'));
+                  } else if (stepCounter == 1) {
+                    return MaterialButton(
+                        color: Colors.grey,
+                        onPressed: onStepContinue,
+                        child: Text('Vikas2'));
                   } else if (stepCounter == 2) {
-                    return Text('Vikas2');
-                  } else if (stepCounter == 3) {
-                    return Text('Vikas3');
+                    return MaterialButton(
+                        color: Colors.blueAccent,
+                        onPressed: onStepContinue,
+                        child: Text('Vikas3'));
+                  }
+                  else if (stepCounter == 3) {
+                    return MaterialButton(
+                        color: Colors.cyan,
+                        onPressed: onStepContinue,
+                        child: Text('Vikas4'));
                   }
                   return Text('Vikas ');
                 },
@@ -87,8 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
