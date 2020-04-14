@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:registerflutterapp/screens/step1_screen.dart';
 import 'package:registerflutterapp/screens/step2_screen.dart';
+import 'package:registerflutterapp/screens/step3_screen.dart';
 import 'package:registerflutterapp/utils/colors.dart';
 import 'package:registerflutterapp/widget/custom_background.dart';
 import 'package:registerflutterapp/widget/custom_stepper.dart';
@@ -110,10 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: onStepContinue,
                     );
                   } else if (stepCounter == 2) {
-                    return MaterialButton(
-                        color: Colors.blueAccent,
-                        onPressed: onStepContinue,
-                        child: Text('Vikas3'));
+                    return Screen3(
+                      onPressed: onStepContinue,
+                    );
                   } else if (stepCounter == 3) {
                     return MaterialButton(
                         color: Colors.cyan,
