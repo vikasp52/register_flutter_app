@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registerflutterapp/screens/step1_screen.dart';
+import 'package:registerflutterapp/screens/step2_screen.dart';
 import 'package:registerflutterapp/utils/colors.dart';
 import 'package:registerflutterapp/widget/custom_background.dart';
 import 'package:registerflutterapp/widget/custom_stepper.dart';
@@ -42,10 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void prepareState() {
     for (var i = 0; i < 4; i++) {
+      print('Active Stepper: ${stepCounter == i}');
       var stepVal = CustomStep(
         title: SizedBox(),
         content: SizedBox(),
-        isActive: true,
+        isActiveStep: stepCounter == i,
       );
       steps.add(stepVal);
     }
@@ -54,10 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AllColors().backgroundColor,
+      backgroundColor: stepCounter != 0
+          ? AllColors().stepperBackgroundColor
+          : AllColors().backgroundColor,
       appBar: stepCounter != 0
           ? AppBar(
-        backgroundColor: AllColors().stepperBackgroundColor,
+              backgroundColor: AllColors().stepperBackgroundColor,
               elevation: 0.0,
               title: Row(
                 children: <Widget>[
@@ -66,11 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         Icons.arrow_back,
                         color: AllColors().whiteColor,
                       ),
-                      onPressed: (){
+                      onPressed: () {
                         setState(() {
-                          stepCounter < steps.length - 1
-                              ? stepCounter += 1
-                              : stepCounter = 0;
+                          stepCounter > 0 ? stepCounter -= 1 : stepCounter = 0;
                         });
                       }),
                   Text(
@@ -96,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: CustomStepper(
                 type: CustomStepperType.horizontal,
                 currentStep: this.stepCounter,
+                verticalPadding: stepCounter != 0 ? 0.0 : 60.0,
                 steps: steps,
                 controlsBuilder: (BuildContext context,
                     {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
@@ -104,10 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: onStepContinue,
                     );
                   } else if (stepCounter == 1) {
-                    return MaterialButton(
-                        color: Colors.grey,
-                        onPressed: onStepContinue,
-                        child: Text('Vikas2'));
+                    return Screen2(
+                      onPressed: onStepContinue,
+                    );
                   } else if (stepCounter == 2) {
                     return MaterialButton(
                         color: Colors.blueAccent,
