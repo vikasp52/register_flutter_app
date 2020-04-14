@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registerflutterapp/screens/step1_screen.dart';
 import 'package:registerflutterapp/utils/colors.dart';
 import 'package:registerflutterapp/widget/custom_background.dart';
 import 'package:registerflutterapp/widget/custom_stepper.dart';
@@ -54,6 +55,36 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AllColors().backgroundColor,
+      appBar: stepCounter != 0
+          ? AppBar(
+        backgroundColor: AllColors().stepperBackgroundColor,
+              elevation: 0.0,
+              title: Row(
+                children: <Widget>[
+                  IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: AllColors().whiteColor,
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          stepCounter < steps.length - 1
+                              ? stepCounter += 1
+                              : stepCounter = 0;
+                        });
+                      }),
+                  Text(
+                    'Create Account',
+                    style: TextStyle(
+                      color: AllColors().whiteColor,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            )
+          : null,
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -69,10 +100,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 controlsBuilder: (BuildContext context,
                     {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
                   if (stepCounter == 0) {
-                    return MaterialButton(
-                        color: Colors.amber,
-                        onPressed: onStepContinue,
-                        child: Text('Vikas1'));
+                    return Screen1(
+                      onPressed: onStepContinue,
+                    );
                   } else if (stepCounter == 1) {
                     return MaterialButton(
                         color: Colors.grey,
@@ -83,8 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.blueAccent,
                         onPressed: onStepContinue,
                         child: Text('Vikas3'));
-                  }
-                  else if (stepCounter == 3) {
+                  } else if (stepCounter == 3) {
                     return MaterialButton(
                         color: Colors.cyan,
                         onPressed: onStepContinue,

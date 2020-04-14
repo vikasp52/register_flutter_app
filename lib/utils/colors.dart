@@ -7,5 +7,8 @@ class AllColors{
   Color nextButtonBackgroundColor = const Color(0xff6f9cef);
   Color labelColor = const Color(0xffd4d4d4);
   Color backgroundColor = const Color(0xfff9f9f9);
+  Color finansTextColor = const Color(0xff3f6efa);
+  Color whiteColor = Colors.white;
+  Color blackColor = Colors.black;
 
 }
