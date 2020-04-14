@@ -47,7 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
       var stepVal = CustomStep(
         title: SizedBox(),
         content: SizedBox(),
-        isActiveStep: stepCounter == i,
       );
       steps.add(stepVal);
     }
