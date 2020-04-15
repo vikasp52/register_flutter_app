@@ -3,10 +3,10 @@ import 'package:registerflutterapp/utils/colors.dart';
 import 'package:registerflutterapp/widget/dropdown_widget.dart';
 import 'package:registerflutterapp/widget/next_button_widget.dart';
 
-class Screen3 extends StatelessWidget {
+class Screen4 extends StatelessWidget {
   final VoidCallback onPressed;
 
-  Screen3({this.onPressed});
+  Screen4({this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class Screen3 extends StatelessWidget {
           height: 20.0,
         ),
         CustomDropdown(
-          label: 'Goal for activation',
+          label: 'Date',
           options: ['Finential Independent', 'Retirement', 'Home'],
           onChanged: (value){},
         ),
@@ -50,16 +50,8 @@ class Screen3 extends StatelessWidget {
           height: 20.0,
         ),
         CustomDropdown(
-          label: 'Monthely income',
+          label: 'Time',
           options: ['\$1000000', '\$100000', '\$10000'],
-          onChanged: (value){},
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
-        CustomDropdown(
-          label: 'Monthely expence',
-          options: ['\$100', '\$1000', '\$10000'],
           onChanged: (value){},
         ),
         SizedBox(
