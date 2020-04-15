@@ -1,26 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:registerflutterapp/utils/colors.dart';
-import 'package:registerflutterapp/widget/dropdown_widget.dart';
+import 'package:registerflutterapp/widget/date_time_picker.dart';
 import 'package:registerflutterapp/widget/next_button_widget.dart';
+import 'package:intl/intl.dart';
 
-class Screen4 extends StatelessWidget {
+class Screen4 extends StatefulWidget {
   final VoidCallback onPressed;
 
   Screen4({this.onPressed});
 
   @override
+  _Screen4State createState() => _Screen4State();
+}
+
+class _Screen4State extends State<Screen4> {
+  String _value = '- Choose Date -';
+
+  @override
   Widget build(BuildContext context) {
+    Future _selectDate() async {
+      var formatter = DateFormat('dd MMMM yyyy');
+
+      DateTime picked = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(2016),
+          lastDate: DateTime(2022)
+      );
+      if(picked != null) setState((){
+        String formatted = formatter.format(picked);
+        _value = formatted;
+      });
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
+
+        Row(
+          children: <Widget>[
+            CircleAvatar(
+              radius: 35.0,
+              backgroundColor: Color(0xff77a9f9),
+              child: CircleAvatar(
+                backgroundColor: AllColors().whiteColor,
+                child: Icon(
+                  Icons.date_range,
+                  color: AllColors().stepperBackgroundColor,
+                ),
+              ),
+            ),
+          ],
+        ),
         SizedBox(
-          height: 25.0,
+          height: 20.0,
         ),
         Text(
-          'Personal Information',
+          'Schedule Video Call',
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
@@ -31,7 +69,7 @@ class Screen4 extends StatelessWidget {
           height: 10.0,
         ),
         Text(
-          'Please fill the information below and your goal for digital saving',
+          'Choose a date and time that you preferred. we will send a link via email to make a video call on the scheduled date and time.',
           style: TextStyle(
             fontSize: 17.0,
             fontWeight: FontWeight.w500,
@@ -41,24 +79,21 @@ class Screen4 extends StatelessWidget {
         SizedBox(
           height: 20.0,
         ),
-        CustomDropdown(
-          label: 'Date',
-          options: ['Finential Independent', 'Retirement', 'Home'],
-          onChanged: (value){},
+        DateTimePicker(
+          label: _value,
+          onTap: ()=> _selectDate(),
         ),
         SizedBox(
           height: 20.0,
         ),
-        CustomDropdown(
+        DateTimePicker(
           label: 'Time',
-          options: ['\$1000000', '\$100000', '\$10000'],
-          onChanged: (value){},
         ),
         SizedBox(
           height: 50.0,
         ),
         NextButton(
-          onPressed: this.onPressed,
+          onPressed: this.widget.onPressed,
         ),
       ],
     );
