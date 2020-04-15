@@ -15,9 +15,13 @@ class Screen4 extends StatefulWidget {
 
 class _Screen4State extends State<Screen4> {
   String _value = '- Choose Date -';
+  TimeOfDay _currentTime = new TimeOfDay.now();
+  String timeText = '- Choose Time -';
 
   @override
   Widget build(BuildContext context) {
+
+    //Select Date
     Future _selectDate() async {
       var formatter = DateFormat('dd MMMM yyyy');
 
@@ -32,6 +36,24 @@ class _Screen4State extends State<Screen4> {
         _value = formatted;
       });
     }
+
+    //Select Time
+    Future<Null> selectTime(BuildContext context) async {
+      TimeOfDay selectedTime = await showTimePicker(
+        context: context,
+        initialTime: _currentTime,
+      );
+
+      MaterialLocalizations localizations = MaterialLocalizations.of(context);
+      String formattedTime = localizations.formatTimeOfDay(selectedTime,
+          alwaysUse24HourFormat: false);
+
+      if (formattedTime != null) {
+        setState(() {
+          timeText = formattedTime;
+        });
+      }
+    };
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,7 +109,8 @@ class _Screen4State extends State<Screen4> {
           height: 20.0,
         ),
         DateTimePicker(
-          label: 'Time',
+          label: timeText,
+          onTap: ()=> selectTime(context),
         ),
         SizedBox(
           height: 50.0,

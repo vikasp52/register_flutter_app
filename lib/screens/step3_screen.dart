@@ -3,10 +3,19 @@ import 'package:registerflutterapp/utils/colors.dart';
 import 'package:registerflutterapp/widget/dropdown_widget.dart';
 import 'package:registerflutterapp/widget/next_button_widget.dart';
 
-class Screen3 extends StatelessWidget {
+class Screen3 extends StatefulWidget {
   final VoidCallback onPressed;
 
   Screen3({this.onPressed});
+
+  @override
+  _Screen3State createState() => _Screen3State();
+}
+
+class _Screen3State extends State<Screen3> {
+  String _selectedGoal;
+  String _selectedIncome;
+  String _selectedExpence;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +75,7 @@ class Screen3 extends StatelessWidget {
           height: 50.0,
         ),
         NextButton(
-          onPressed: this.onPressed,
+          onPressed: this.widget.onPressed,
         ),
       ],
     );
