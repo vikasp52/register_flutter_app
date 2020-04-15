@@ -34,6 +34,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int stepCounter = 0;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _autoValidate = false;
 
   List<CustomStep> steps = [];
 
@@ -41,6 +43,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     prepareState();
     super.initState();
+  }
+
+  void _validateInputs({VoidCallback onStepContinue}) {
+    if (_formKey.currentState.validate()) {
+//    If all data are correct then save data to out variables
+      onStepContinue();
+    } else {
+//    If all data are not valid then start auto validation.
+      setState(() {
+        _autoValidate = true;
+      });
+    }
   }
 
   void prepareState() {
@@ -104,12 +118,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 controlsBuilder: (BuildContext context,
                     {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
                   if (stepCounter == 0) {
-                    return Screen1(
-                      onPressed: onStepContinue,
+                    return Form(
+                      key: _formKey,
+                      autovalidate: _autoValidate,
+                      child: Screen1(
+                        onPressed: ()=> _validateInputs(onStepContinue: onStepContinue),
+                      ),
                     );
                   } else if (stepCounter == 1) {
-                    return Screen2(
-                      onPressed: onStepContinue,
+                    return Form(
+                      key: _formKey,
+                      autovalidate: _autoValidate,
+                      child: Screen2(
+                        onPressed: ()=> _validateInputs(onStepContinue: onStepContinue),
+                      ),
                     );
                   } else if (stepCounter == 2) {
                     return Screen3(

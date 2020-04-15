@@ -7,6 +7,16 @@ class Screen1 extends StatelessWidget {
 
   Screen1({this.onPressed});
 
+  String validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Enter Valid Email';
+    else
+      return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,13 +62,20 @@ class Screen1 extends StatelessWidget {
               SizedBox(
                 height: 30.0,
               ),
-              TextField(
+
+              TextFormField(
+                validator: validateEmail,
                 decoration: InputDecoration(
                   hintText: 'Email',
                   prefixIcon: Icon(Icons.email, color: AllColors().blackColor,),
                   enabledBorder: const OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.white, width: 10.0),
-
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white, width: 10.0),
+                  ),
+                  border: const OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white, width: 10.0),
                   ),
                 ),
               ),

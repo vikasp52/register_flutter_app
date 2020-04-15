@@ -11,5 +11,6 @@ class AllColors{
   Color finansTextColor = const Color(0xff3f6efa);
   Color whiteColor = Colors.white;
   Color blackColor = Colors.black;
+  Color orangeColor = Colors.orangeAccent;
 
 }

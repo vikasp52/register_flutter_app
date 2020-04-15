@@ -15,7 +15,7 @@ class Screen3 extends StatefulWidget {
 class _Screen3State extends State<Screen3> {
   String _selectedGoal;
   String _selectedIncome;
-  String _selectedExpence;
+  String _selectedExpense;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,12 @@ class _Screen3State extends State<Screen3> {
         CustomDropdown(
           label: 'Goal for activation',
           options: ['Finential Independent', 'Retirement', 'Home'],
-          onChanged: (value){},
+          value: _selectedGoal,
+          onChanged: (value){
+            setState(() {
+              _selectedGoal = value;
+            });
+          },
         ),
         SizedBox(
           height: 20.0,
@@ -61,15 +66,25 @@ class _Screen3State extends State<Screen3> {
         CustomDropdown(
           label: 'Monthely income',
           options: ['\$1000000', '\$100000', '\$10000'],
-          onChanged: (value){},
+          value: _selectedIncome,
+          onChanged: (value){
+            setState(() {
+              _selectedIncome = value;
+            });
+          },
         ),
         SizedBox(
           height: 20.0,
         ),
         CustomDropdown(
-          label: 'Monthely expence',
+          label: 'Monthely expense',
           options: ['\$100', '\$1000', '\$10000'],
-          onChanged: (value){},
+          value: _selectedExpense,
+          onChanged: (value){
+            setState(() {
+              _selectedExpense = value;
+            });
+          },
         ),
         SizedBox(
           height: 50.0,

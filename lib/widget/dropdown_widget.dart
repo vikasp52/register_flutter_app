@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:registerflutterapp/utils/colors.dart';
 
 class CustomDropdown extends StatelessWidget {
-
   final String label;
   final List<String> options;
   final ValueChanged onChanged;
@@ -16,8 +15,9 @@ class CustomDropdown extends StatelessWidget {
       return Container(
         width: double.infinity,
         decoration: BoxDecoration(
-            color: AllColors().whiteColor,
-            borderRadius: BorderRadius.circular(10.0),),
+          color: AllColors().whiteColor,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,7 +39,9 @@ class CustomDropdown extends StatelessWidget {
                 child: DropdownButton<String>(
                   icon: Icon(Icons.keyboard_arrow_down),
                   style: TextStyle(
-                    color: AllColors().whiteColor
+                    color: AllColors().blackColor,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
                   ),
                   hint: Text(
                     "- Choose option -",
@@ -56,7 +58,8 @@ class CustomDropdown extends StatelessWidget {
                       child: Text(
                         value,
                         textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 20.0),
+                        style: TextStyle(
+                            fontSize: 20.0, color: AllColors().blackColor),
                       ),
                     );
                   }).toList(),
